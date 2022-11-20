@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fallVelocity;
     [SerializeField] private float jumpForce;
 
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float radiousCheck;
+    private bool isGrounded;
+
     [SerializeField] private Camera _camera;
     private Vector3 cameraForward;
     private Vector3 cameraRight;
@@ -50,6 +55,12 @@ public class PlayerController : MonoBehaviour
         PlayerSkills();
         
         _playerController.Move(movePlayer * Time.deltaTime);
+        Debug.Log(playerInput.magnitude);
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, radiousCheck, groundLayer);
     }
 
     private void CameraDirection()
@@ -78,15 +89,24 @@ public class PlayerController : MonoBehaviour
             movePlayer.y = fallVelocity;
             _animator.SetFloat("VerticalVelocity", _playerController.velocity.y);
         }
-        _animator.SetBool("IsGrounded", _playerController.isGrounded);
+        _animator.SetBool("IsGrounded", isGrounded);
     }
 
     private void PlayerSkills()
     {
-        if (_playerController.isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
             fallVelocity = jumpForce;
             movePlayer.y = fallVelocity;
+            
+            if (playerInput.magnitude == 0)
+            {
+                _animator.SetTrigger("Jump");
+            }
+            else
+            {
+                _animator.SetTrigger("JumpRunning");
+            }
         }
     }
 
