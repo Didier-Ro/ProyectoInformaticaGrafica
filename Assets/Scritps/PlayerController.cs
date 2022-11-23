@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
         PlayerSkills();
         
         _playerController.Move(movePlayer * Time.deltaTime);
-        Debug.Log(playerInput.magnitude);
     }
 
     private void FixedUpdate()
@@ -99,14 +98,7 @@ public class PlayerController : MonoBehaviour
             fallVelocity = jumpForce;
             movePlayer.y = fallVelocity;
             
-            if (playerInput.magnitude == 0)
-            {
-                _animator.SetTrigger("Jump");
-            }
-            else
-            {
-                _animator.SetTrigger("JumpRunning");
-            }
+            _animator.SetTrigger("Jump");
         }
     }
 
