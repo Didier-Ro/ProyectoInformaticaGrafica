@@ -1,4 +1,4 @@
-Shader "Unlit/VertexID"
+Shader "Unlit/Shader2"
 {
     SubShader
     {
