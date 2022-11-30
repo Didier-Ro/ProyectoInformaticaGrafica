@@ -10,7 +10,9 @@ Shader "4toParc/StencilWall"
             
             Stencil
             {
+                //Valor con el que compara
                 Ref 1
+                //Compara el contenido con la otra parte
                 Comp equal
             }
 

@@ -12,8 +12,11 @@ Shader "Unlit/Shader5"
 
         Stencil
         {
+            //Valor con el que compara
             Ref 1
+            //Compara el valor de referencia con el contenido
             Comp always
+            //Cuando pasa la prueba del stencil la referencia pasa
             Pass replace
         }
 
