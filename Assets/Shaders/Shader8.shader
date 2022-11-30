@@ -40,9 +40,9 @@ Shader "Unlit/Shader8"
 
         void vert(inout appdata_full v)
         {
-            v.vertex.x += v.vertex * _ExtrudeX;
-            v.vertex.y += v.normal * _ExtrudeY;
-            v.vertex.z += v.texcoord * _ExtrudeZ;   
+            v.vertex.x += v.vertex * _ExtrudeX; //Extrución en la geometria
+            v.vertex.y += v.normal * _ExtrudeY; //Extrución en la normal
+            v.vertex.z += v.texcoord * _ExtrudeZ; //Extrucion en las coordenadas uv   
         }
 
         struct Input

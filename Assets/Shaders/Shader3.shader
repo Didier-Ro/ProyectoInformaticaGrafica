@@ -14,7 +14,7 @@ Shader "Unlit/VertexMovement" {
  
 		struct Input {
 			float2 uv_MainTex;
-			float multiplyValue; //The Surface function will need this
+			float multiplyValue; //multiplicar un input A por un input B
 		};
  
 		fixed4 _Color;
@@ -22,19 +22,19 @@ Shader "Unlit/VertexMovement" {
  
 		void vert(inout appdata_full v, out Input o) {
 			
-			float multiplyValue = abs(sin(_Time * 30 + v.vertex.y)); //how much we want to multiply our vertex
+			float multiplyValue = abs(sin(_Time * 30 + v.vertex.y));
 			v.vertex.x *= multiplyValue * v.normal.x;
 			v.vertex.z *= multiplyValue * v.normal.y;
  
 			UNITY_INITIALIZE_OUTPUT(Input, o);
-			o.multiplyValue = multiplyValue; //assing the multiply data to the "Input" value, so the surface shader can use it
+			o.multiplyValue = multiplyValue;//Permite usarlo en el Input
 			
 		}
  
 		void surf(Input IN, inout SurfaceOutputStandard o) {
  
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = lerp(c.rgb, float3(.3, .3, 1), IN.multiplyValue);//the lerp factor is how much we've scaled our vertex
+			o.Albedo = lerp(c.rgb, float3(.3, .3, 1), IN.multiplyValue);
 			o.Alpha = c.a;
 		}
 		ENDCG

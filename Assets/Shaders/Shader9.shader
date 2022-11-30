@@ -27,7 +27,7 @@ Shader "Unlit/Shader9"
         void vert(inout appdata_full v)
         {
             v.color.x *= v.color + 1 * sin(_Time * 10);
-            v.vertex.y *= v.color;
+            v.vertex.y *= v.color;//Permite "separar el rim del modelo"
             v.color.z *= v.color + 1 * sin(_Time * 10);   
         }
         

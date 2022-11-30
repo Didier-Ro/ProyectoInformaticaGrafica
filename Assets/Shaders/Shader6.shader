@@ -30,7 +30,7 @@ Shader "Unlit/Shader6"
           {
                 
               v.vertex.x += v.normal * (_Outline*(_Time*1));
-              v.vertex.y += v.normal * (_Outline*(_Time*1));
+              v.vertex.y += v.normal * (_Outline*(_Time*1)); //Extruciones en la normal por el tiempo 
               v.vertex.z += v.normal * (_Outline*(_Time*1));
           }
           void surf(Input IN, inout SurfaceOutput o)

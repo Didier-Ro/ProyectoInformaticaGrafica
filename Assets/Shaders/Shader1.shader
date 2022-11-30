@@ -13,15 +13,14 @@ Shader "Unlit/Screen Position"
             #pragma fragment frag
             #pragma target 3.0
 
-            // note: no SV_POSITION in this struct
             struct v2f {
                 float2 uv : TEXCOORD0;
             };
 
             v2f vert (
-                float4 vertex : POSITION, // vertex position input
-                float2 uv : TEXCOORD0, // texture coordinate input
-                out float4 outpos : SV_POSITION // clip space position output
+                float4 vertex : POSITION,
+                float2 uv : TEXCOORD0, 
+                out float4 outpos : SV_POSITION 
                 )
             {
                 v2f o;
@@ -34,19 +33,11 @@ Shader "Unlit/Screen Position"
 
             fixed4 frag (v2f i, UNITY_VPOS_TYPE screenPos : VPOS) : SV_Target
             {
-                // screenPos.xy will contain pixel integer coordinates.
-                // use them to implement a checkerboard pattern that skips rendering
-                // 4x4 blocks of pixels
-
-                // checker value will be negative for 4x4 blocks of pixels
-                // in a checkerboard pattern
-                screenPos.xy = floor(screenPos.xy * 0.25) * 0.5;
+                screenPos.xy = floor(screenPos.xy * 0.25) * 0.5; // Floor se redondeará al entero más cercano
                 float checker = -frac(screenPos.r + screenPos.g);
-
-                // clip HLSL instruction stops rendering a pixel if value is negative
-                clip(checker);
-
-                // for pixels that were kept, read the texture and output it
+                
+                clip(checker); //Permite no dibujar los pixeles en la uv que estén por debajo de zero
+                
                 fixed4 c = tex2D (_MainTex, i.uv);
                 return c;
             }

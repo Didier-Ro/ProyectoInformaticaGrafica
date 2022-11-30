@@ -15,15 +15,14 @@ Shader "Unlit/Shader2"
             };
 
             v2f vert (
-                float4 vertex : POSITION, // vertex position input
-                uint vid : SV_VertexID // vertex ID, needs to be uint
+                float4 vertex : POSITION,
+                uint vid : SV_VertexID 
                 )
             {
                 v2f o;
                 o.pos = UnityObjectToClipPos(vertex);
-                // output funky colors based on vertex ID
                 float f = (float)vid;
-                o.color = half4(sin(f/10),sin(f/100),sin(f/1000),0) * 0.5 + 0.5;
+                o.color = half4(sin(f/10),sin(f/100),sin(f/1000),0) * 0.5 + 0.5; //Distorciona en el color, no afecta geometrías
                 return o;
             }
 

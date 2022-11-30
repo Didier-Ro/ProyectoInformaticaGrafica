@@ -29,7 +29,7 @@ Shader "Unlit/Shader10"
           };
           void vert(inout appdata_full v)
           {
-              v.vertex.xyz += v.color * _Extrude * cos(_Time*5);
+              v.vertex.xyz += v.color * _Extrude * cos(_Time*5); //Tiempo con funcion coseno genera un movimiento diferente y que tan rápido
           }
           void surf(Input IN, inout SurfaceOutput o)
           {

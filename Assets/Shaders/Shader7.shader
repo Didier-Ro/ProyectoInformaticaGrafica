@@ -22,14 +22,14 @@ Shader "Unlit/Shader7"
 
         void vert(inout appdata_full v)
         {
-            v.vertex.xyz += v.normal * _Amount;
+            v.vertex.xyz += v.normal * _Amount;//Realiza un extrución en todos los ejes 
         }
         
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
             o.Albedo = c.rgb;
-            o.Alpha = c.a;
+            o.Alpha = c.a;//habilita la informacion que se encuentra en alfa
         }
         ENDCG
     }

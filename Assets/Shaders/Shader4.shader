@@ -12,7 +12,6 @@ Shader "Unlit/Shader4"
         #pragma surface surf Lambert vertex:vert
 
         float4 _Color;
-        float _Amount;
         half _Range;
         
         struct Input
@@ -22,7 +21,7 @@ Shader "Unlit/Shader4"
 
         void vert(inout appdata_full v)
         {
-            v.vertex.x += sin(_Time.x * _Range + v.vertex.y * 2) * .7;
+            v.vertex.x += sin(_Time.x * _Range + v.vertex.y * 2);//El tiempo en y permite el movimiento ondulatoria y en x de lado a lado
         }
         
         void surf (Input IN, inout SurfaceOutput o)
